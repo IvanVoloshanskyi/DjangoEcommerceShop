@@ -1,0 +1,27 @@
+
+.login-form {
+    margin-top: 2%;
+}
+
+
+.login_fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login_fields button {
+    margin: 2% 0 2% 0;
+}
+
+.login_fields button:hover {
+    color: black;
+    background-color: inherit;
+    border: 2px solid black;
+    transform: scale(1.1);
+}
+
+.reset-password:hover{
+    color: #4ac1f7;
+
+}

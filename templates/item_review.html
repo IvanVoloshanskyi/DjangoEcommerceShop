@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="item-page">
+		{% include 'inc/_tabs.html' %}
+        <div class="review-wrapper">
+            <div class="wrapper-review-card">
+                <div class="write-review">
+                    <h4>Let your review about this probuct</h4>
+                    {% if request.user.is_authenticated %}
+                        <div class="wrapper-button-dropdown">
+                            <button type="button" class="button-write-review">Write your review</button>
+                        </div>
+                    {% else %}
+                        <div class="wrapper-button-dropdown">
+                            <span>You need to
+                                <a href="{% url 'login' %}" style="text-decoration: underline; color:#4ac1f7;">
+                                    sign up
+                                </a>
+                            </span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="dropdown">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{ form.rating }}
+                        <label>
+                            <span class="fname">Comment<span class="required">*</span></span>
+                        </label>
+                        {{ form.comment }}
+                        <label>
+                            <span class="fname">Advantages<span class="required">*</span></span>
+                        </label>
+                        {{ form.advantages }}
+                        <label>
+                            <span class="fname">Disadvantages<span class="required">*</span></span>
+                        </label>
+                        {{ form.disadvantages }}
+                        <button class="wrapper-button-dropdown__send" type="submit">Send</button>
+                    </form>
+                </div>
+
+
+                <div class="reviews">
+                    {% for element in review %}
+
+                        <div class="review_card">
+
+
+                            <div class="review_username">
+                                <span>{{ element.user.username }}</span>
+                                <span>{{ element.comment_date }}</span>
+                            </div>
+                            <hr>
+                            <div class="review_text">
+                                <div class="review_rating">
+                                    <svg style="height: 16px; width: 20px;" class="header-account-image">
+                                        <use href="{% static 'backend_ecommerce/img/aaaaaaaa.svg' %}#icon{% if element.stars < 1 %}-empty{% endif %}-rating-star"></use>
+                                    </svg>
+                                    <svg style="height: 16px; width: 20px;" class="header-account-image">
+                                        <use href="{% static 'backend_ecommerce/img/aaaaaaaa.svg' %}#icon{% if element.stars < 2 %}-empty{% endif %}-rating-star"></use>
+                                    </svg>
+                                    <svg style="height: 16px; width: 20px;" class="header-account-image">
+                                        <use href="{% static 'backend_ecommerce/img/aaaaaaaa.svg' %}#icon{% if element.stars < 3 %}-empty{% endif %}-rating-star"></use>
+                                    </svg>
+                                    <svg style="height: 16px; width: 20px;" class="header-account-image">
+                                        <use href="{% static 'backend_ecommerce/img/aaaaaaaa.svg' %}#icon{% if element.stars < 4 %}-empty{% endif %}-rating-star"></use>
+                                    </svg>
+                                    <svg style="height: 16px; width: 20px;" class="header-account-image">
+                                        <use href="{% static 'backend_ecommerce/img/aaaaaaaa.svg' %}#icon{% if element.stars < 5 %}-empty{% endif %}-rating-star"></use>
+                                    </svg>
+                                </div>
+                                <br>
+                                <span>{{ element.comment }}</span>
+                                <h5>Advantages: </h5><span>{{ element.advantages }}</span>
+                                <h5>Disadvantages:</h5> <span>{{ element.disadvantages }}</span>
+                            </div>
+
+                        </div>
+                    {% empty %}
+                        <h6 style="font-size: xxx-large">No reviews!</h6>
+
+
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="review-item">
+                <div class="review-item__main">
+                    <img src="{{ object.photo.url }}" alt="">
+                    <p>{{ object.title }}</p>
+                    <br>
+                </div>
+
+                <div class="review-item__price">
+                    <h4>{{ object.price }} $</h4>
+                    <a href="">
+                        <a href="{% url 'add-to-cart' object.id %}">
+                            <button class="button-reviews">Buy</button>
+                        </a>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block java_include %}
+    <script>
+        const ratingInputs = document.querySelectorAll('.rating input');
+        ratingInputs.forEach(input => {
+            input.addEventListener('change', (event) => {
+                const checkedInput = event.target;
+                const checkedValue = checkedInput.value;
+                // змінюємо background-image відповідних зірок
+                const labels = document.querySelectorAll('.rating label');
+                labels.forEach((label, index) => {
+                    if (index >= checkedValue) {
+                        label.style.backgroundImage = 'url({% static 'backend_ecommerce/img/solid-star-svgrepo-com.svg' %})';
+                    } else {
+                        label.style.backgroundImage = 'url({% static 'backend_ecommerce/img/star-rate-svgrepo-com.svg' %})';
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="application/javascript" src="{% static 'backend_ecommerce/js/item_review.js' %}"></script>
+{% endblock %}

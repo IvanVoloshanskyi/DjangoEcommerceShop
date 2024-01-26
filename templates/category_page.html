@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<section class="cards" style="padding: 5% 7% 5% 7%;">
+		{% for el in object_list %}
+			<div class="card {{ el.title }}">
+				<img src="{{ el.photo.url }}" alt="NONE" style="margin-bottom: 10px;">
+				<img src="{% static 'backend_ecommerce/img/liked.svg' %}" style="height: 32px; width: 32px; ">
+				<p>{{ el.title }}</p>
+				<div class="price-n-button">
+					<p>{{ el.price }} $</p>
+					<a href="{{ el.get_absolute_url }}">Purchase</a>
+				</div>
+			</div>
+		{% endfor %}
+	</section>
+
+{% endblock %}

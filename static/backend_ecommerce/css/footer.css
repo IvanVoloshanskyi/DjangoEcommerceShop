@@ -1,0 +1,127 @@
+footer {
+    display: flex;
+
+    align-items: center;
+    flex-direction: column
+}
+
+.footer {
+    background-color: black;
+    padding: 4%;
+
+
+}
+
+.upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.lower{
+    width: 100%;
+}
+
+.footer-text {
+    margin-bottom: 10px;
+}
+
+.footer-title {
+    margin-bottom: 15px;
+}
+
+.footer-logo {
+    color: white;
+    /*font-size: 150%;*/
+    font-weight: 100;
+}
+
+
+.footer-title {
+    color: var(--footer-color-main);
+    font-weight: 700;
+    font-size: 150%;
+}
+
+.footer-text {
+    color: white;
+    font-size: 100%;
+    font-weight: 100;
+}
+
+.footer-img {
+    fill: var(--footer-color-main);
+    max-height: 20px;
+    max-width: 20px;
+    float: left;
+    margin-right: 1%;
+}
+
+section.footer.left-side {
+    padding: 0;
+    width: 25%;
+}
+
+section.footer.center {
+    padding: 0;
+    width: 25%;
+}
+
+
+.footer-ul.helpful_links {
+    width: 30vh;
+}
+
+section.footer.right-side {
+    padding: 0;
+    width: 25%;
+}
+
+.footer.right-side p {
+    margin: 0;
+}
+
+.to-right {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.footer-ul.information {
+    margin-right: 10%;
+}
+
+input.footer-input {
+    background-image: url(../img/email-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    background-position: 1px;
+    border-radius: 4px;
+    padding-left: 30px;
+    height: 35px;
+    font-size: 14px;
+    background-size: 23px;
+}
+
+.footer-line {
+    border-bottom: 1px solid white;
+}
+
+.footer-social-networks {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.sn{
+    width: 20%;
+}
+.sn img{
+    margin-right: 3%;
+    max-width: 32px;
+    max-height: 32px;
+}
+
+.copyrights {
+    color: white;
+}

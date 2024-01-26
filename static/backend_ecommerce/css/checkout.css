@@ -1,0 +1,115 @@
+
+.checkout-page {
+    margin-top: 2%;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 1200px) {
+    .checkout-page {
+        max-width: 1140px;
+    }
+}
+
+.d-flex {
+    display: flex;
+    flex-direction: row;
+    background: #f6f6f6;
+    border-radius: 0 0 5px 5px;
+    padding: 25px;
+}
+
+form {
+    flex: 4;
+}
+
+.your_order {
+    flex: 2;
+}
+
+.checkout-page__title {
+    background-color: #f6f6f6;
+    padding: 20px;
+    color: #f6f6f6;
+}
+
+.checkout-page__title h2 {
+    color: black;
+}
+
+.required {
+    color: red;
+}
+
+label, table {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    align-items: center;
+}
+
+.checkout-page__form > label > span {
+
+    float: left;
+    width: 25%;
+    margin-top: 12px;
+    padding-right: 10px;
+}
+
+.checkout-page__form {
+    display: flex;
+    flex-direction: row;
+}
+
+.wrapper {
+    width: 70%;
+}
+
+.checkout-input {
+    width: 70%;
+    height: 30px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #dadada;
+    color: #888;
+}
+
+.checkout-input.country {
+    width: 73.3%;
+    height: 42px;
+
+}
+
+select {
+    width: 73%;
+    height: 45px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.your_order {
+    margin-top: 15px;
+    height: 600px;
+    padding: 20px;
+    border: 1px solid #dadada;
+}
+
+table {
+    margin: 0;
+    padding: 0;
+}
+
+th {
+    border-bottom: 1px solid #dadada;
+    padding: 10px 0;
+}
+
+.your_order > div {
+    padding: 15px 0;
+}
+
+
+

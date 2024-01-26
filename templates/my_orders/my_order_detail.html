@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="my-order">
+        <div class="my-order__checkout-details">
+            <p>Order information</p>
+            <table class="my-table">
+                <tr>
+                    <th class="table-header">Number of order</th>
+                    <th class="table-header">Name</th>
+                    <th class="table-header">Surname</th>
+                    <th class="table-header">Country</th>
+                    <th class="table-header">Phone number</th>
+                    <th class="table-header">Zip code</th>
+                    <th class="table-header">Payment method</th>
+                </tr>
+                <tr>
+                    <td class="table-data">{{ element.id }}</td>
+                    <td class="table-data">{{ element.checkout_details.first_name }}</td>
+                    <td class="table-data">{{ element.checkout_details.last_name }}</td>
+                    <td class="table-data">{{ element.checkout_details.country }}</td>
+                    <td class="table-data">{{ element.checkout_details.phone_num }}</td>
+                    <td class="table-data">{{ element.checkout_details.zip }}</td>
+                    <td class="table-data">{{ element.checkout_details.get_payment_option_display }}</td>
+                </tr>
+            </table>
+            <table class="my-order__products">
+                <tr>
+                    <th class="table-header">Image</th>
+                    <th class="table-header">Name</th>
+                    <th class="table-header">Quantity</th>
+                    <th class="table-header">Price</th>
+
+                </tr>
+                {% for el in element.items.all %}
+                    <tr>
+                        <td><img src="{{ el.item.photo.url }}" alt="{{ el.item.photo.url }}"></td>
+                        <td>{{ el.item.title }}</td>
+                        <td>{{ el.quantity }}</td>
+                        <td>{{ el.item.price }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="3" class="table-footer">Total</td>
+                    <td class="table-footer">{{ element.get_total_price }}</td>
+                </tr>
+            </table>
+            <a href="{% url "my-orders" %}">
+                <button class="go-back">Back</button>
+            </a>
+        </div>
+        {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </section>
+{% endblock %}

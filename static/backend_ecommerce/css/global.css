@@ -1,0 +1,48 @@
+:root {
+    --orange-color: #EB6D20;
+    --footer-color-main: #c5872c;
+}
+
+
+html * {
+    font-family: 'Poppins';
+}
+
+body {
+    margin: 0 0 0 0;
+
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    border: inherit;
+    background-color: var(--orange-color);
+    color: #fff;
+    width: 88px;
+    height: 40px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.messages {
+    margin-top: 150px;
+}
+
+section {
+    padding: 0;
+}
+
+.active {
+    color: var(--footer-color-main);
+}

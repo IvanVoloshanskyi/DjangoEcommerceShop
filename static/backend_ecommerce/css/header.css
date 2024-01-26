@@ -1,0 +1,161 @@
+
+header {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+    padding: 0 0 0 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.header-container__text a {
+    color: var(--orange-color);
+    font-size: xxx-large;
+}
+
+.header-container__search {
+    display: flex;
+    align-items: center;
+}
+
+.header-container__buttons__ul {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-right: 40px;
+
+}
+
+.header-container__buttons__ul:last-child {
+    margin-right: 0;
+}
+
+.header-container__buttons__ul.account img {
+    margin-right: 12px;
+
+}
+
+.header-account-image {
+    fill: currentColor;
+    margin-right: 5px;
+}
+
+
+.header-account,
+.header-shopping {
+    color: black;
+    display: flex;
+    align-items: center;
+}
+
+
+.header-shopping:hover {
+    color: var(--footer-color-main);
+}
+
+.header-sign-up:hover {
+    color: var(--footer-color-main);
+}
+
+.header-account:hover {
+    color: var(--footer-color-main);
+}
+
+.header-login:hover {
+    color: var(--footer-color-main);
+}
+
+.header-register:hover {
+    color: var(--footer-color-main);
+}
+
+
+.header-container__buttons__ul.shopping img {
+    margin-right: 12px;
+}
+
+.header-search-input {
+
+    line-height: 1.33;
+    border-radius: 5px;
+    border-width: 1px;
+    width: 560px;
+    height: 35px;
+    margin: 0 auto;
+    background-image: url("../img/search1-svgrepo-com.svg");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 1px;
+    padding-left: 30px;
+    font-size: 16px;
+    font-weight: normal;
+    color: black;
+
+}
+
+
+textarea {
+    font-size: 24px;
+}
+
+
+.header-categories ul {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.selected {
+    color: var(--footer-color-main);
+}
+
+
+.header-account-dropdown {
+    display: none;
+}
+
+.header-account-checkbox:checked + .header-account-dropdown {
+    display: block;
+}
+
+
+.accordion-toggle {
+    display: none;
+}
+
+.header-account {
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.accordion-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.accordion-toggle:checked + .header-account .accordion-content {
+    max-height: 100px; /* Adjust the value as needed */
+}
+
+.accordion-content a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+.accordion-content a:hover {
+    background-color: #f0f0f0;
+}
+

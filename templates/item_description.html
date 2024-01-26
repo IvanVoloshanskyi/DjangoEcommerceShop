@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+	<main class="item-description">
+		{% include 'inc/_tabs.html' %}
+		<section class="item-description__wrapper">
+			<h5>Coming Soon...</h5>
+			<img src="{% static 'backend_ecommerce/img/coming-soon.png' %}" alt="">
+		</section>
+	</main>
+
+{% endblock %}

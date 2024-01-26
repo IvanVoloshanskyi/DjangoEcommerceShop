@@ -1,0 +1,49 @@
+<div class="background">
+	<div class="help-banner">
+		<button class="close-banner">
+			&times;
+		</button>
+		<h1>Powered by Ivan Voloshanskyi</h1>
+		<p>That`s my little project with all functionality, from the item page to checkout page.
+			My e-commerce shop
+			built with Django has all the necessary features to
+			provide a seamless online shopping experience for customers</p>
+	</div>
+</div>
+
+<style>
+    .background {
+		display: none;
+        background-color: rgba(0, 0, 0, 0.5); /* замість opacity: .5; */
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        margin: 0 auto;
+        overflow: auto;
+    }
+
+    .help-banner {
+        background-color: black;
+        padding: 4%;
+        width: 60%;
+        height: 55%;
+        margin: 7% auto;
+        color: white;
+		border-radius: 10px;
+    }
+
+    .close-banner {
+        background-color: inherit;
+        font-size: 25px;
+        margin-left: 95%;
+		width: 10px;
+    }
+
+    .close-banner:hover {
+        color: grey;
+    }
+</style>

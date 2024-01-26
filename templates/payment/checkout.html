@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load shopping_cart_templatetags %}
+{% block content %}
+    {% include 'inc/_loader.html' %}
+
+    <div class="checkout-page">
+
+        <div class="checkout-page__title">
+            <h2>Product Order Form</h2>
+        </div>
+
+        <div class="d-flex">
+
+
+            <form action="{% url 'checkout' %}" method="POST" class="checkout-page__form" id="id_checkout_form">
+                {% csrf_token %}
+                <div class="wrapper">
+                    <label>
+                        <span class="fname">First Name <span class="required">*</span></span>
+                        {{ form.first_name }}
+                    </label>
+                    <label>
+                        <span class="lname">Last Name <span class="required">*</span></span>
+                        {{ form.last_name }}
+                    </label>
+                    <label>
+                        <span>Phone <span class="required">*</span></span>
+                        {{ form.phone_num }}
+                    </label>
+                    <label>
+                        <span>Country <span class="required">*</span></span>
+                        {{ form.country }}
+                        <style>
+                            .country-select-flag {
+                                display: none;
+                            }
+                        </style>
+                    </label>
+                    <label>
+                        <span>City <span class="required">*</span></span>
+                        <input type="text" name="city" class="checkout-input" id="id_city">
+                    </label>
+                    <label>
+                        <span>Postcode / ZIP <span class="required">*</span></span>
+                        {{ form.zip }}
+                    </label>
+                    <button type="submit" class="add-to-cart" style="width: 100%; height: 60px;"
+                            id="checkout-button">
+                        Checkout
+                    </button>
+                </div>
+
+                <div class="your_order">
+                    <table>
+                        <tr>
+                            <th colspan="2">Your order</th>
+                        </tr>
+                        {% for ordered_item in ordered_items.items.all %}
+                            <tr>
+                                <td>{{ ordered_item.item.title }} x {{ ordered_item.quantity }}(Qty)</td>
+                                <td>${{ ordered_item.get_item_price }}</td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td>Subtotal</td>
+                            <td>${{ ordered_items.get_total_price }}</td>
+                        </tr>
+                        <tr>
+                            <td>Shipping</td>
+                            <td>Free shipping</td>
+                        </tr>
+                    </table>
+                    <br>
+                    {{ form.payment_option }}
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block java_include %}
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        function validateForm(data) {
+            let errors = []
+
+            if (data.first_name === '') {
+                errors.push('First name is empty')
+            }
+
+            if (data.last_name === '') {
+                errors.push('Last name is empty')
+            }
+
+            if (data.phone === '') {
+                errors.push('Phone is empty')
+            }
+
+            if (data.country === '') {
+                errors.push('Country is not selected')
+            }
+
+            if (data.city === '') {
+                errors.push('City is not selected')
+            }
+
+            if (data.zipcode === '') {
+                errors.push('Zipcode is empty')
+            }
+
+            if (!data.payment_option) {
+                errors.push('Payment option is not selected');
+            }
+
+            return errors
+        }
+
+
+        let checkoutBtn = document.getElementById('checkout-button')
+        checkoutBtn.addEventListener('click', function (event) {
+                let data = {
+                    'first_name': document.querySelector('input[id=id_first_name]').value,
+                    'last_name': document.querySelector('input[id=id_last_name]').value,
+                    'phone': document.querySelector('input[id=id_phone_num]').value,
+                    'country': document.querySelector('select[id=id_country]').value,
+                    'city': document.querySelector('input[id=id_city]').value,
+                    'zipcode': document.querySelector('input[id=id_zip]').value,
+                    'payment_option': document.querySelector('input[name=payment_option]:checked'),
+                }
+
+                let errors = validateForm(data)
+
+                if (errors.length) {
+                    console.log('Errors', errors)
+                } else {
+                    var stripe = Stripe('pk_test_51MdB0oHyD4EeQL5UJMvzX9LpR6MhhZd8NB7vVil8DLhq2pHWb1iqv44cN41r95nCigRyKn4lfmBzyzHnzh8f2VsX00ZCtFyVf7');
+                    const loader = document.querySelector('.loader');
+                    loader.style.display = 'block';
+                    fetch('/create-checkout-session/')
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            // Call redirectToCheckout with the session ID
+                            return stripe.redirectToCheckout({
+                                sessionId: data.sessionId
+                            });
+                        })
+                        .then(function (result) {
+                            // Handle any errors from redirectToCheckout
+                        })
+                        .catch(function (error) {
+                            // Handle any other errors
+                        })
+                }
+            }
+        );
+	</script>
+
+{% endblock %}
+

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+	<div class="wrapper-success" style="
+	display: flex;
+    flex-direction: column;
+    align-items: center;">
+		<h1>You have successfully ordered the product</h1>
+		<h2>You have received the order details by mail</h2>
+		<h3>Return to <a href="{% url 'homepage' %}" style="text-decoration: underline; color: #4ac1f7">Homepage</a>
+		</h3>
+	</div>
+{% endblock %}

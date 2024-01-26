@@ -1,0 +1,95 @@
+{% load static %}
+{% load backend_ecommerce %}
+{% load shopping_cart_templatetags %}
+<header class="header">
+    <div class="header-container">
+        <h1 class="header-container__text">
+            <a href="{% url 'homepage' %}">E-commerce</a>
+        </h1>
+        <div class="header-container__search">
+            <form action="{% url 'homepage' %}">
+                <label for="search-input">
+                    <input class="header-search-input" autocomplete="off" type="text" name="search"
+                           placeholder="Search anything">
+                </label>
+            </form>
+
+        </div>
+        <div class="header-container__buttons">
+            <ul class="header-container__buttons__ul">
+                <li class="header-container__buttons__ul help"
+                        {% if user.is_authenticated %} style="margin-right: 0" {% endif %}>
+                    <button class="header-button-help" id="header-button-help__id">
+                        <span class="header-button-help__text" id="header-span-help">Help</span>
+                        <span class="header-button-help__question" id="idk">?</span>
+                    </button>
+                </li>
+                <li class="header-container__buttons__ul account"
+                        {% if user.is_authenticated %} style="margin-right: 0" {% endif %}>
+                    {% if user.is_authenticated %}
+                        <input type="checkbox" id="accordion-account" class="accordion-toggle">
+                        <label for="accordion-account" class="header-account">
+                            <svg style="height: 16px; width: 20px;" class="header-account-image">
+                                <use href="{% static 'backend_ecommerce/img/aaaaaaaa.svg' %}#icon-user"></use>
+                            </svg>
+                            <span>Hi, {{ user.username }}</span>
+                            <span class="accordion-content">
+                                <a href="{% url 'my-orders' %}">My Orders</a>
+                                <a href="{% url 'logout' %}">Logout</a>
+                            </span>
+                        </label>
+                    {% else %}
+                        <div class="not-authenticated" style="display: flex; flex-direction: column;">
+                            <a href="{% url 'register' %}" class="header-register">Register</a>
+                            <a href="{% url 'login' %}" class="header-sign-up">Sign Up</a>
+                        </div>
+                    {% endif %}
+                </li>
+                <li class="header-container__buttons__ul shopping"
+                    {% if not user.is_authenticated %} style="display: none" {% endif %}>
+                    <a href="{% url 'shopping-cart' %}" class="header-shopping">
+                        <svg style="height: 20px; width: 20px;" class="header-account-image">
+                            <use href="{% static 'backend_ecommerce/img/aaaaaaaa.svg' %}#icon-cart"></use>
+                        </svg>
+                        <span id="header-item-quantity"> {{ request.user|cart_item_count }}</span>
+                        <script>
+                            function updateText() {
+                                const itemCountElement = document.getElementById('header-item-quantity');
+                                const itemCount = parseInt(itemCountElement.innerHTML);
+
+                                if (itemCount > 1) {
+                                    itemCountElement.innerHTML = 'Items ' + itemCount;
+                                } else if (itemCount === 1) {
+                                    itemCountElement.innerHTML = 'Item ' + itemCount;
+                                } else {
+                                    itemCountElement.innerHTML = 'No orders';
+                                }
+                            }
+
+                            updateText()
+
+                        </script>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+
+    <div class="header-categories">
+        <ul class="header-categories__ul">
+
+            {% pls_category as categories %}
+            {% for el in categories %}
+                <li>
+                    <a class="header-categories {{ el.title }}" href="{{ el.get_absolute_url }}">
+                        {{ el.title }}</a>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+</header>

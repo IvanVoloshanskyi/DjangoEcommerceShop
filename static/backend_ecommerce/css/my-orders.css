@@ -1,0 +1,23 @@
+.my-orders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5% 7%;
+}
+
+.my-orders a {
+    color: #4ac1f7;
+}
+
+.my-order__table th, .my-order__table td {
+    padding: 8px;
+}
+
+.side-panel {
+}
+
+.my-order__table {
+    width: 100%;
+
+}
+

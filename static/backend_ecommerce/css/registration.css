@@ -1,0 +1,39 @@
+.form-errors {
+    color: red;
+    font-size: 14px;
+}
+
+.errorlist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-input {
+    height: 100%;
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 26px;
+}
+
+.registration {
+    margin-top: 2%;
+}
+
+.registration_fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.registration_fields button {
+    margin: 2% 0 2% 0;
+}
+
+.registration_fields button:hover {
+    color: black;
+    background-color: inherit;
+    border: 2px solid black;
+    transform: scale(1.1);
+}

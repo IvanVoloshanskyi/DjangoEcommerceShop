@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="item-page">
+		{% include 'inc/_tabs.html' %}
+        <div class="item-page__first-part">
+            <img src="{{ object.photo.url }}" class="item-page__photo">
+            <div class="item-page__characteristics">
+                <span class="item-page__characteristics__category">{{ object.category }}</span>
+                <p class="item-page__characteristics__title">{{ object.title }}</p>
+                <p class="item-page__characteristics__description">{{ object.description }}</p>
+            </div>
+        </div>
+        <div class="item-page__second-part">
+            <div class="buttons-n-price">
+                <p class="price">Price: {{ object.price }} $</p>
+                <div class="buttons">
+                    <a href="{% url 'homepage' %}">
+                        <button class="go-back">Go Back</button>
+                    </a>
+                    <a href="{{ object.get_add_to_cart_url }}">
+                        <button class="add-to-cart">Add To Cart</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

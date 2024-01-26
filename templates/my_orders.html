@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="my-orders">
+        <p>Your Orders: </p>
+        <main class="my-order__cart">
+            <table class="my-order__table">
+                <tr class="my-order__articles">
+                    <th class="my-order__th">Order</th>
+                    <th class="my-order__th">Date</th>
+                    <th class="my-order__th">Status</th>
+                    <th class="my-order__th">Total</th>
+                </tr>
+                {% for item in orders %}
+                    <tr class="my_order__info">
+                        <td class="my-order__td"><a href="{% url 'my-orders-detail' item.id %}">{{ item.id }}</a></td>
+                        <td class="my-order__td">{{ item.ordered_date|date:"M d, Y" }}</td>
+                        <td class="my-order__td">{{ item.ordered }}</td>
+                        <td class="my-order__td">{{ item.get_total_price }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </main>
+    {% include "inc/_pagination.html" %}
+    </section>
+
+{% endblock %}
+
+<div class="side-panel">
+    <a href="#">
+        <p class="side-panel__text">Shopping Cart</p>
+    </a>
+    <a href="#">
+        <p class="side-panel__text">My Orders</p>
+    </a>
+    <a href="#">
+        <p class="side-panel__text">Logout</p>
+    </a>
+</div>

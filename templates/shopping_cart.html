@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	{% if user.is_authenticated %}
+		<section class="shopping-cart">
+			{% for order_item in object.items.all %}
+				<div class="shopping-cart__item">
+					<div class="shopping-cart__item-name__image">
+						<img src="{{ order_item.item.photo.url }}" alt="IMG">
+						<a href="{{ order_item.item.get_absolute_url }}"><p>{{ order_item.item.title }}</p></a>
+					</div>
+					<div class="increase-reduce">
+
+						<a href="{% url 'remove-item-from-cart' order_item.item.id %}">
+							<button class="increase-reduce"> -</button>
+						</a>
+						<p class="increase-reduce__amount"> {{ order_item.quantity }} </p>
+						<a href="{% url 'add-to-cart' order_item.item.id %}">
+							<button class="increase-reduce"> +</button>
+						</a>
+					</div>
+					<p>{{ order_item.get_item_price }} $</p>
+					<a href="{% url 'remove-from-cart' order_item.item.id %}">
+						<svg style="height: 25px; width: 25px;" class="delete-all">
+							<use href="{% static 'backend_ecommerce/img/aaaaaaaa.svg' %}#icon-delete_sweep">
+							</use>
+						</svg>
+					</a>
+
+				</div>
+
+			{% empty %}
+				<div class="empty">
+					<h1>Your cart is empty!</h1>
+				</div>
+			{% endfor %}
+
+
+			<div class="total-amount">
+				<p>Total amount: {{ object.get_total_price|truncatechars:8 }} $</p>
+			</div>
+			<div class="go-back-continue">
+				<a href="{% url 'homepage' %}">
+					<button class="go-back">Go back</button>
+				</a>
+				<a href="{% url 'checkout' %}">
+					<button class="add-to-cart">Checkout</button>
+				</a>
+			</div>
+		</section>
+	{% endif %}
+{% endblock %}
